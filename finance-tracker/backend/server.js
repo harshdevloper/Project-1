@@ -7,7 +7,10 @@ const authRoutes = require("./routes/auth");
 const transactionRoutes = require("./routes/transactions");
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: "https://finance-tracker-frontend-pq2g.onrender.com", // deployed frontend URL
+    credentials: true
+}));
 app.use(express.json());
 
 app.get("/", (_req, res) => res.send("Hello World from Backend 🚀"));
