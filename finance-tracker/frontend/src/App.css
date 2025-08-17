@@ -9,8 +9,10 @@ body {
 
 /* Navbar */
 .navbar { 
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
   display: flex; 
   align-items: center; 
@@ -19,6 +21,7 @@ body {
   background: #1565C0; 
   color: #fff; 
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  height: 48px;
 }
 .navbar-left {
   display: flex;
@@ -39,14 +42,19 @@ body {
 }
 .navbar .nav-link:hover { opacity: 0.8; }
 
-/* Sidebar */
+/* Sidebar - Now Fixed */
 .sidebar {
+  position: fixed;
+  top: 72px; /* navbar height + padding */
+  left: 0;
   width: 220px;
   background: #fff;
   padding: 20px;
   border-right: 1px solid #e0e0e0;
-  min-height: calc(100vh - 60px);
+  height: calc(100vh - 72px);
   box-shadow: 2px 0 6px rgba(0,0,0,0.05);
+  overflow-y: auto;
+  z-index: 50;
 }
 .sidebar ul {
   list-style: none;
@@ -71,11 +79,12 @@ body {
   transform: translateX(4px);
 }
 
-/* Layout */
+/* Layout - Adjusted for Fixed Sidebar */
 .app-layout {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  padding-top: 72px; /* Account for fixed navbar */
 }
 .main-container {
   display: flex;
@@ -83,9 +92,11 @@ body {
 }
 .content {
   flex: 1;
+  margin-left: 260px; /* sidebar width (220px) + padding (40px) */
   padding: 30px;
   background: #f1f5f9;
   overflow-y: auto;
+  min-height: calc(100vh - 72px);
 }
 
 /* Auth */
@@ -118,8 +129,6 @@ body {
   cursor: pointer; 
   font-weight: 600; 
   transition: all 0.2s ease; 
-  
-
   text-decoration: none;
 }
 .btn:hover { 
@@ -238,4 +247,25 @@ body {
 .features .card:hover { 
   transform: translateY(-5px); 
   box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+/* Responsive Design for Fixed Layout */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+  
+  .content {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .navbar {
+    padding: 12px 15px;
+  }
 }
