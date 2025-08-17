@@ -1,5 +1,4 @@
-const API = "http://localhost:5000";
-
+const API = " https://finance-tracker-backend-j4gc.onrender.com";
 const json = (m, body, token) => ({
   method: m,
   headers: {
